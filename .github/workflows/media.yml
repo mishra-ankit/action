@@ -9,7 +9,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -18,18 +18,15 @@ jobs:
         with:
           repository: mishra-ankit/media-generator
           token: ${{ secrets.TOKEN }} # `GH_PAT` is a secret that contains your PAT
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
       - name: Install dependencies
-        run: sudo apt install ffmpeg
+        run: |
+         brew install node@16
+         brew install ffmpeg
       - name: NPM Install
         run: |
           npm ci
-          node -v
-          npm -v
       - name: Generate and upload Reddit Funny Images video
-        run: ./run.sh
+        run: node ./runner.js --type redditFunny
       - name: Commit
         if: ${{ always() }}
         uses: stefanzweifel/git-auto-commit-action@v4.8.0
