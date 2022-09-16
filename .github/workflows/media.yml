@@ -29,7 +29,7 @@ jobs:
           node -v
           npm -v
       - name: Generate and upload Reddit Funny Images video
-        run: node ./runner.js --type redditFunny
+        run: ./run.sh
       - name: Commit
         if: ${{ always() }}
         uses: stefanzweifel/git-auto-commit-action@v4.8.0
