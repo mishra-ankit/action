@@ -26,7 +26,7 @@ jobs:
         run: |
           npm ci
       - name: Generate and upload Reddit Funny Images video
-        run: node ./runner.js --type redditFunny
+        run: node ./runner.js --type askRedditShorts
       - name: Commit
         if: ${{ always() }}
         uses: stefanzweifel/git-auto-commit-action@v4.8.0
