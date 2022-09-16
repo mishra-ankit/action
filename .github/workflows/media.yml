@@ -18,7 +18,9 @@ jobs:
         with:
           repository: mishra-ankit/media-generator
           token: ${{ secrets.TOKEN }} # `GH_PAT` is a secret that contains your PAT
-      
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - name: Install dependencies
         run: |
          nvm use 16
