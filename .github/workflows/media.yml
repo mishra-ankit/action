@@ -24,7 +24,10 @@ jobs:
       - name: Install dependencies
         run: sudo apt install ffmpeg
       - name: NPM Install
-        run: npm ci
+        run: |
+          npm ci
+          node -v
+          npm -v
       - name: Generate and upload Reddit Funny Images video
         run: node ./runner.js --type redditFunny
       - name: Commit
