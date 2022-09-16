@@ -22,9 +22,7 @@ jobs:
         with:
           node-version: 16
       - name: Install dependencies
-        run: |
-         nvm use 16
-         sudo apt install ffmpeg
+        run: sudo apt install ffmpeg
       - name: NPM Install
         run: npm ci
       - name: Generate and upload Reddit Funny Images video
