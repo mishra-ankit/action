@@ -26,3 +26,4 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: mishra-ankit/media-generator
+          token: ${{ secrets.TOKEN }} # `GH_PAT` is a secret that contains your PAT
