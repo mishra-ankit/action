@@ -31,7 +31,7 @@ jobs:
       - name: Permission
         run: chmod +x run.sh
       - name: Run
-        run: node ./runner.js --type redditFunny
+        run: node ./runner.js --type askRedditStories
       - name: Commit
         if: ${{ always() }}
         uses: stefanzweifel/git-auto-commit-action@v4.8.0
