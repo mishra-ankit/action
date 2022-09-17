@@ -8,7 +8,7 @@ on:
 
 jobs:
   generate:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     name: Generate Video
     steps:
       - name: Checkout repo
@@ -18,8 +18,10 @@ jobs:
           token: ${{ secrets.TOKEN }} 
       - name: Install dependencies
         run: |
-         brew install node@16
-         brew install ffmpeg
+         nvm install 16.14.0
+         nvm use 16.14.0
+         sudo apt-get update
+         sudo apt install ffmpeg
       - name: NPM Install
         run: npm ci
       - name: Permission
