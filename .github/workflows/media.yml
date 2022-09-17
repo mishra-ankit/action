@@ -6,34 +6,31 @@ on:
     - cron:  '0 */6 * * *'
   workflow_dispatch:
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  generate:
-    runs-on: ubuntu-latest
-    name: Generate Video
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: macos-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
         with:
           repository: mishra-ankit/media-generator
-          token: ${{ secrets.TOKEN }}
-      - name: Install node 16
-        shell: bash -l -eo pipefail {0}
-        run: nvm install 16.14.0
-      - name: Switch to node16
-        shell: bash -l -eo pipefail {0}
-        run: nvm use 16.14.0
+          token: ${{ secrets.TOKEN }} # `GH_PAT` is a secret that contains your PAT
       - name: Install dependencies
         run: |
-         sudo apt-get update
-         sudo apt install ffmpeg
+         brew install node@16
+         brew install ffmpeg
       - name: NPM Install
-        run: npm ci
-      - name: Permission
-        run: chmod +x run.sh
-      - name: Run
-        run: node ./runner.js --type askRedditStories
+        run: |
+          npm ci
+      - name: Generate and upload Reddit Funny Images video
+        run: node ./runner.js --type askRedditShorts
       - name: Commit
         if: ${{ always() }}
         uses: stefanzweifel/git-auto-commit-action@v4.8.0
         with:
-          commit_message: Update
+          commit_message: Update history of used
